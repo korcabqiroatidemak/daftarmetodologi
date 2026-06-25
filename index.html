@@ -2,348 +2,104 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pendaftaran Ditutup · Qiroati Demak</title>
+    <title>KORCAB DEMAK</title> 
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+    
+    <link rel="icon" type="image/png" href="icon-512.png">
+    <link rel="manifest" href="manifest.json">
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#244034">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
     <style>
-        * {
+        /* ===============================
+           CANGKANG MATI (RIGID FRAME)
+           =============================== */
+        html, body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(145deg, #eef2f7 0%, #dce4ed 100%);
-            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-            padding: 1.5rem;
-        }
-
-        .card {
-            max-width: 720px;
             width: 100%;
-            background: white;
-            border-radius: 40px;
-            padding: 3rem 2.8rem 2.8rem;
-            box-shadow: 0 25px 60px -15px rgba(0, 20, 30, 0.25);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
+            height: 100dvh; /* Menggunakan Dynamic Viewport Height */
+            background-color: #eee;
+            overflow: hidden; /* KUNCI MATI SCROLL DI SINI */
+            overscroll-behavior: none; /* Cegah efek karet (bounce) di HP */
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #d4af6e, #b8944a, #d4af6e);
-            background-size: 200% 100%;
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%,
-            100% {
-                background-position: 0% 0%;
-            }
-            50% {
-                background-position: 100% 0%;
-            }
-        }
-
-        .logo-area {
+        .iframe-container {
+            width: 100%;
+            height: 100dvh;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 1.2rem;
         }
 
-        .logo-area img {
-            height: 56px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .logo-area .brand {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #1e3342;
-            letter-spacing: 1px;
-        }
-
-        .logo-area .brand span {
-            color: #b8944a;
-        }
-
-        .icon-closed {
-            font-size: 4.5rem;
-            line-height: 1;
-            margin: 0.6rem 0 0.2rem;
-        }
-
-        .card h1 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: #1a2f40;
-            margin-bottom: 0.4rem;
-            letter-spacing: 0.5px;
-        }
-
-        .card .sub-title {
-            font-size: 1.1rem;
-            color: #4a6a80;
-            font-weight: 400;
-            margin-bottom: 1.8rem;
-            border-bottom: 2px dashed #dce4ed;
-            padding-bottom: 1.2rem;
-        }
-
-        .card .message {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: #2d4a62;
-            margin-bottom: 1.8rem;
-            background: #f7faff;
-            padding: 1.2rem 1.8rem;
-            border-radius: 18px;
-            border-left: 5px solid #d4af6e;
-            text-align: left;
-        }
-
-        .card .message strong {
-            color: #1a3f57;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.8rem;
-            margin: 1.5rem 0 2rem;
-            text-align: left;
-        }
-
-        .info-item {
-            background: #f5f8fc;
-            padding: 0.8rem 1.2rem;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .info-item .label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #6a8aa0;
-            font-weight: 600;
-        }
-
-        .info-item .value {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #1e3342;
-        }
-
-        .info-item .value small {
-            font-weight: 400;
-            color: #4a6a80;
-        }
-
-        .btn-next {
-            display: inline-block;
-            margin-top: 0.6rem;
-            padding: 0.9rem 2.8rem;
-            background: linear-gradient(145deg, #1e3342, #2a4a60);
-            color: white;
+        iframe {
+            flex: 1; /* Biarkan iframe mengisi sisa ruang mutlak */
+            width: 100%;
+            height: 100%;
             border: none;
-            border-radius: 50px;
-            font-size: 1.05rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(30, 51, 66, 0.25);
-            transition: all 0.2s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
+            background-color: transparent;
         }
 
-        .btn-next:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 28px rgba(30, 51, 66, 0.3);
-            background: linear-gradient(145deg, #253e52, #2f536e);
-        }
-
-        .btn-next .arrow {
-            font-size: 1.4rem;
-            transition: transform 0.25s;
-        }
-
-        .btn-next:hover .arrow {
-            transform: translateX(4px);
-        }
-
-        .footer-note {
-            margin-top: 2rem;
-            font-size: 0.8rem;
-            color: #7a94a8;
-            border-top: 1px solid #eaf0f6;
-            padding-top: 1.2rem;
-            letter-spacing: 0.3px;
-        }
-
-        .footer-note .tahun {
-            font-weight: 600;
-            color: #4a6a80;
-        }
-
-        /* hiasan */
-        .ornament {
+        /* LOADING OVERLAY */
+        .loading {
+            position: fixed;
+            inset: 0;
+            background: #eee;
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin: 0.6rem 0 1rem;
+            font-size: 1rem;
+            color: #555;
+            z-index: 9999;
+            transition: opacity 0.4s ease; /* Efek transisi halus (fade out) */
         }
 
-        .ornament span {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #d4af6e;
-            opacity: 0.4;
-        }
-
-        .ornament span:nth-child(2) {
-            width: 30px;
-            border-radius: 20px;
-            opacity: 0.6;
-        }
-
-        @media (max-width: 550px) {
-            .card {
-                padding: 2rem 1.5rem 2rem;
-            }
-            .card h1 {
-                font-size: 1.8rem;
-            }
-            .logo-area .brand {
-                font-size: 1.2rem;
-            }
-            .logo-area img {
-                height: 42px;
-            }
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            .card .message {
-                font-size: 0.95rem;
-                padding: 1rem 1.2rem;
-            }
-            .icon-closed {
-                font-size: 3.2rem;
-            }
-            .btn-next {
-                padding: 0.7rem 2rem;
-                font-size: 0.95rem;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .card {
-                padding: 1.5rem 1rem;
-                border-radius: 28px;
-            }
-            .card h1 {
-                font-size: 1.5rem;
-            }
-            .logo-area {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none; /* Mencegah interaksi saat sedang transisi hilang */
         }
     </style>
 </head>
+
 <body>
-
-    <div class="card">
-
-        <!-- Logo + Brand -->
-        <div class="logo-area">
-            <img src="QIRAATI.png" alt="QIRAATI logo">
-            <div class="brand">Qiroati <span>Demak</span></div>
-        </div>
-
-        <!-- Ornamen -->
-        <div class="ornament">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-        <!-- Icon & Judul -->
-        <div class="icon-closed">🔒</div>
-        <h1>Pendaftaran Ditutup</h1>
-        <div class="sub-title">Pembinaan Metodologi Dasar Qiroati · Periode Muharram 1448 H</div>
-
-        <!-- Pesan -->
-        <div class="message">
-            <strong>📢 Alhamdulillah,</strong> kuota peserta untuk periode ini telah terpenuhi.
-            Kami mengucapkan terima kasih atas antusiasme dan kepercayaan Anda kepada
-            <strong>Qiroati Cabang Demak</strong>.
-            <br><br>
-            🌙 <strong>Silakan mencoba lagi pada periode berikutnya</strong> — Insya Allah
-            akan kembali dibuka pada <strong>tahun depan</strong>.
-            <br><br>
-            Semoga Allah memudahkan langkah kita dalam menuntut ilmu Al-Qur'an. 🤲
-        </div>
-
-        <!-- Info Ringkas -->
-        <div class="info-grid">
-            <div class="info-item">
-                <span style="font-size:1.4rem;">📅</span>
-                <div>
-                    <div class="label">Periode</div>
-                    <div class="value">Muharram 1448 H</div>
-                </div>
-            </div>
-            <div class="info-item">
-                <span style="font-size:1.4rem;">👥</span>
-                <div>
-                    <div class="label">Kuota Terisi</div>
-                    <div class="value">82 <small>peserta</small></div>
-                </div>
-            </div>
-            <div class="info-item" style="grid-column: 1 / -1;">
-                <span style="font-size:1.4rem;">⏳</span>
-                <div>
-                    <div class="label">Pendaftaran Berikutnya</div>
-                    <div class="value">Insya Allah · 1449 H <small>(tahun depan)</small></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tombol dengan Link -->
-        <a href="https://korcabqiroatidemak.github.io/mtd_id/" class="btn-next" target="_blank">
-            <span>📋 Lihat Daftar Peserta</span>
-            <span class="arrow">↗</span>
-        </a>
-
-        <div class="footer-note">
-            <span>Pendidikan Al-Qur'an Metode Qiroati · Cabang Demak</span>
-            <br>
-            <span class="tahun">〓 1448 H / 2026 M 〓</span>
-        </div>
-
+    <div id="loading" class="loading">Memuat aplikasi…</div>
+    
+    <div class="iframe-container">
+        <iframe
+            id="appFrame"
+            title="Aplikasi KORCAB DEMAK"
+            src="https://script.google.com/macros/s/AKfycbzP-bz2rHEtToy91wD5VG3-l7aGWCkWYfzW1ee2JqL9T6cDqKujX7yFxOv_60akc1hx/exec" 
+            allowfullscreen
+            loading="eager">
+        </iframe>
     </div>
+ 
+    <script>
+        const iframe = document.getElementById('appFrame');
+        const loading = document.getElementById('loading');
 
+        // Sembunyikan loading saat iframe selesai dimuat
+        iframe.addEventListener('load', () => {
+            loading.classList.add('hidden');
+            
+            // Opsional: Hapus elemen dari DOM setelah animasi fade selesai agar tidak membebani memori
+            setTimeout(() => {
+                loading.style.display = 'none';
+            }, 400); 
+        });
+
+        // DAFTARKAN SERVICE WORKER UNTUK MENGAKTIFKAN PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker Terdaftar dengan sukses.'))
+                    .catch(err => console.error('Gagal mendaftarkan Service Worker:', err));
+            });
+        }
+    </script>
 </body>
 </html>
